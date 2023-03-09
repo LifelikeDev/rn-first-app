@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import { useState } from "react";
+import ApiCallComp from "./components/apiCall";
 
 export default function App() {
   const [note, setNote] = useState("");
@@ -69,6 +70,11 @@ export default function App() {
               </Pressable>
             )}
           />
+        </View>
+
+        {/* Api Call Component */}
+        <View>
+          <ApiCallComp />
         </View>
       </View>
     </View>
