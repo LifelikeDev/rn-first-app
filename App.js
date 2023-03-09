@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import { useState } from "react";
 
 export default function App() {
@@ -19,19 +26,17 @@ export default function App() {
     setList(filtered);
   };
 
-  console.log(list);
-
   return (
     <View style={styles.container}>
       <Text
         style={{
-          fontSize: 20,
+          fontSize: 22,
           margin: 30,
-          fontWeight: 500,
+          fontWeight: 600,
           fontStyle: "italic",
         }}
       >
-        Hello React Native
+        Note Tracker
       </Text>
 
       {/* Input Form */}
@@ -45,21 +50,25 @@ export default function App() {
             onChangeText={handleOnChangeText}
           />
 
-          <Button onPress={handleOnPressButton} title="Add Note" />
+          <Pressable onPress={handleOnPressButton} style={styles.button}>
+            <Text style={{ color: "#fff" }}>Add Note</Text>
+          </Pressable>
         </View>
 
-        {/* List */}
+        {/* List View */}
 
         <View style={styles.listContainer}>
-          {list.map((el, idx) => (
-            <Text
-              key={`note: ${idx}`}
-              style={styles.listItem}
-              onPress={() => handleItemDelete(idx)}
-            >
-              {el}
-            </Text>
-          ))}
+          <ScrollView>
+            {list.map((item, idx) => (
+              <Text
+                key={`note: ${idx}`}
+                style={styles.listItem}
+                onPress={() => handleItemDelete(idx)}
+              >
+                {item}
+              </Text>
+            ))}
+          </ScrollView>
         </View>
       </View>
     </View>
@@ -72,6 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 120,
   },
   nestedContainer: {
     backgroundColor: "#bbb",
@@ -82,8 +92,7 @@ const styles = StyleSheet.create({
     width: 200,
   },
   inputContainer: {
-    padding: 10,
-    paddingBottom: 30,
+    paddingVertical: 15,
     flexDirection: "row",
     gap: 2,
   },
@@ -91,17 +100,25 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ddd",
     flex: 1,
+    paddingHorizontal: 5,
+  },
+  button: {
+    backgroundColor: "#282872",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
   },
   listContainer: {
     paddingTop: 30,
+    marginBottom: 50,
   },
   listItem: {
     borderRadius: 1,
     borderColor: "red",
     backgroundColor: "#282872",
     padding: 10,
-    marginBottom: 20,
+    marginVertical: 10,
     color: "white",
-    fontSize: 20,
+    fontSize: 17,
   },
 });
