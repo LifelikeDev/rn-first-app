@@ -5,6 +5,7 @@ import {
   TextInput,
   Pressable,
   ScrollView,
+  FlatList,
 } from "react-native";
 import { useState } from "react";
 
@@ -58,8 +59,9 @@ export default function App() {
         {/* List View */}
 
         <View style={styles.listContainer}>
-          <ScrollView>
-            {list.map((item, idx) => (
+          <FlatList
+            data={list}
+            renderItem={(item) => (
               <Text
                 key={`note: ${idx}`}
                 style={styles.listItem}
@@ -67,8 +69,8 @@ export default function App() {
               >
                 {item}
               </Text>
-            ))}
-          </ScrollView>
+            )}
+          />
         </View>
       </View>
     </View>
