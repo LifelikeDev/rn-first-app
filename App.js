@@ -61,14 +61,12 @@ export default function App() {
         <View style={styles.listContainer}>
           <FlatList
             data={list}
-            renderItem={(item) => (
-              <Text
-                key={`note: ${idx}`}
-                style={styles.listItem}
-                onPress={() => handleItemDelete(idx)}
-              >
-                {item}
-              </Text>
+            renderItem={(itemData) => (
+              <Pressable onPress={() => handleItemDelete(itemData.index)}>
+                <Text key={`note: ${itemData.index}`} style={styles.listItem}>
+                  {itemData.item}
+                </Text>
+              </Pressable>
             )}
           />
         </View>
