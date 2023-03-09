@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
 
 const ApiCallComp = () => {
   const [apiData, setApiData] = useState([]);
@@ -24,7 +24,18 @@ const ApiCallComp = () => {
 
   return (
     <View>
-      <Text>Api Data</Text>
+      <Text style={{ fontSize: 20, fontWeight: 500, marginBottom: 20 }}>
+        Api Data
+      </Text>
+
+      <View>
+        <FlatList
+          data={apiData}
+          renderItem={(itemData) => (
+            <Text key={itemData.index}>{itemData.item}</Text>
+          )}
+        />
+      </View>
     </View>
   );
 };

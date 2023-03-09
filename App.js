@@ -59,7 +59,7 @@ export default function App() {
 
         {/* List View */}
 
-        <View style={styles.listContainer}>
+        {/* <View style={styles.listContainer}>
           <FlatList
             data={list}
             renderItem={(itemData) => (
@@ -70,10 +70,10 @@ export default function App() {
               </Pressable>
             )}
           />
-        </View>
+        </View> */}
 
         {/* Api Call Component */}
-        <View>
+        <View style={styles.listContainer}>
           <ApiCallComp />
         </View>
       </View>
