@@ -1,10 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import ProductListing from "./screens/productListing";
+import Favourites from "./screens/favourites";
+import ProductDetails from "./screens/productDetails";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <ProductListing />
+      <Favourites />
+      <ProductDetails />
       <StatusBar style="auto" />
     </View>
   );
