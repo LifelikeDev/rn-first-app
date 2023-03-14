@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 
 const ApiCallComp = () => {
   const [apiData, setApiData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // api call
     const getDataFromApi = async () => {
+      setLoading(true);
+
       const response = await fetch("https://dummyjson.com/users");
       const data = await response.json();
 
@@ -14,13 +23,20 @@ const ApiCallComp = () => {
         setApiData(
           data.users.map((user) => `${user.firstName} ${user.lastName}`)
         );
+        setLoading(false);
       }
     };
 
     getDataFromApi();
   }, []);
 
-  console.log(apiData);
+  if (loading) {
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#282872" />
+      </View>
+    );
+  }
 
   return (
     <View>
