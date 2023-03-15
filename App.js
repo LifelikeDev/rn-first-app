@@ -5,8 +5,19 @@ import Favourites from "./screens/favourites";
 import ProductDetails from "./screens/productDetails";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function BottomTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="productListing" component={ProductListing} />
+      <Tab.Screen name="favourites" component={Favourites} />
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -14,8 +25,7 @@ export default function App() {
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="productListing" component={ProductListing} />
-          <Stack.Screen name="favourites" component={Favourites} />
+          <Stack.Screen name="bottomTabs" component={BottomTabs} />
           <Stack.Screen name="productDetails" component={ProductDetails} />
         </Stack.Navigator>
       </NavigationContainer>
