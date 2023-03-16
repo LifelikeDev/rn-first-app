@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { ActivityIndicator } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import ProductListItem from "../../components/productList";
 import { Context } from "../../context";
 
@@ -18,9 +19,10 @@ function generateRandomColor() {
 
 export default function ProductListing() {
   const { loading, products } = useContext(Context);
+  const navigation = useNavigation();
 
   const handleOnPress = () => {
-    console.log("pressed...");
+    navigation.navigate("productDetails");
   };
 
   if (loading) {

@@ -5,11 +5,14 @@ export default function ProductListItem({ title, onPress, bgColor }) {
   return (
     <View style={styles.productItemOuterContainer}>
       <Pressable
+        android_ripple={{ color: "#cecece" }}
         style={{ ...styles.pressableView, backgroundColor: bgColor }}
         onPress={onPress}
       >
         <View style={styles.productItemInnerContainer}>
-          <Text style={styles.title}>{title}</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
+            {title}
+          </Text>
         </View>
       </Pressable>
     </View>
