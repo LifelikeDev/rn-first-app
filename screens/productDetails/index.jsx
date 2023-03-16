@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { ActivityIndicator } from "react-native";
+import ProductDetailsItem from "../../components/productDetails";
 
 export default function ProductDetails() {
   const {
@@ -29,7 +30,7 @@ export default function ProductDetails() {
     fetchProductDetails();
   }, []);
 
-  console.log(productDetailsData);
+  // console.log(productDetailsData);
 
   if (loading) {
     return (
@@ -39,7 +40,7 @@ export default function ProductDetails() {
 
   return (
     <View>
-      <Text>ProductDetails</Text>
+      <ProductDetailsItem data={productDetailsData} />
     </View>
   );
 }
