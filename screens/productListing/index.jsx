@@ -21,8 +21,8 @@ export default function ProductListing() {
   const { loading, products } = useContext(Context);
   const navigation = useNavigation();
 
-  const handleOnPress = () => {
-    navigation.navigate("productDetails");
+  const handleOnPress = (itemId) => {
+    navigation.navigate("productDetails", { productId: itemId });
   };
 
   if (loading) {
@@ -35,11 +35,11 @@ export default function ProductListing() {
     <View>
       <FlatList
         data={products}
-        renderItem={(itemData) => (
+        renderItem={({ item }) => (
           <ProductListItem
-            title={itemData.item.title}
+            title={item.title}
             bgColor={generateRandomColor()}
-            onPress={handleOnPress}
+            onPress={() => handleOnPress(item.id)}
           />
         )}
         keyExtractor={(itemData) => itemData.id}
