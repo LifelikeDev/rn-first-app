@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useRoute } from "@react-navigation/native";
-import { View, Text, StyleSheet } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { ActivityIndicator } from "react-native";
 import ProductDetailsItem from "../../components/productDetails";
 
@@ -8,10 +8,12 @@ export default function ProductDetails() {
   const {
     params: { productId },
   } = useRoute();
+  const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
   const [productDetailsData, setProductDetailsData] = useState([]);
 
+  // handle data fetch
   useEffect(() => {
     setLoading(true);
 
@@ -30,7 +32,14 @@ export default function ProductDetails() {
     fetchProductDetails();
   }, []);
 
-  // console.log(productDetailsData);
+  // handle adding favourites
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return <Button color="#282872" title="Add Favourites" />;
+      },
+    });
+  }, []);
 
   if (loading) {
     return (
