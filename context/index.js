@@ -1,8 +1,3 @@
-//   3 main steps
-//   i. create the context
-//  ii. provide the context
-// iii. consume that context
-
 import { createContext, useEffect, useState } from "react";
 
 export const Context = createContext(null);
