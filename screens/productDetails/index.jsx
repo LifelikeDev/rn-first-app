@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { View, Text, StyleSheet, Button, Modal, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Modal,
+  Pressable,
+  TextInput,
+} from "react-native";
 import { ActivityIndicator } from "react-native";
 import ProductDetailsItem from "../../components/productDetails";
 
@@ -13,6 +21,7 @@ export default function ProductDetails() {
   const [loading, setLoading] = useState(false);
   const [productDetailsData, setProductDetailsData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [reason, setReason] = useState("");
 
   // handle data fetch
   useEffect(() => {
@@ -48,6 +57,11 @@ export default function ProductDetails() {
     });
   }, []);
 
+  // handle reason add
+  const handleInputChange = (e) => {
+    setReason(e.target.value);
+  };
+
   if (loading) {
     return (
       <ActivityIndicator style={styles.loader} size="large" color="#282872" />
@@ -69,13 +83,28 @@ export default function ProductDetails() {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
+            <TextInput
+              placeholder="Why Do You Like This Product?"
+              onChange={handleInputChange}
+              value={reason}
+              style={styles.reasonInput}
+            />
+
+            <View style={styles.buttonWrapper}>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Add</Text>
+              </Pressable>
+
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Cancel</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -111,7 +140,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 4,
     padding: 10,
     elevation: 2,
   },
@@ -121,6 +150,11 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: "#2196F3",
   },
+  buttonWrapper: {
+    flexDirection: "row",
+    gap: 5,
+    marginTop: 10,
+  },
   textStyle: {
     color: "white",
     fontWeight: "bold",
@@ -129,5 +163,11 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  reasonInput: {
+    borderRadius: 1,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    padding: 10,
   },
 });
