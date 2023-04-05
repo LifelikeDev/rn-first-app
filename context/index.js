@@ -4,7 +4,27 @@ export const Context = createContext(null);
 
 const ProductContext = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [favouriteItems, setFavouriteItems] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // add to favourites
+  const addToFavourites = (productId, reason) => {
+    let favouriteItemsCopy = [...favouriteItems];
+    const foundIndex = favouriteItemsCopy.findIndex(
+      (item) => item.id === productId
+    );
+
+    if (foundIndex === -1) {
+      const currentProductItem = products.find((item) => item.id === productId);
+      favouriteItemsCopy.push({
+        id: productId,
+        title: currentProductItem.title,
+        reason,
+      });
+    }
+
+    setFavouriteItems(favouriteItemsCopy);
+  };
 
   // api call
   useEffect(() => {
@@ -23,8 +43,12 @@ const ProductContext = ({ children }) => {
     fetchProducts();
   }, []);
 
+  console.log(favouriteItems);
+
   return (
-    <Context.Provider value={{ products, loading }}>
+    <Context.Provider
+      value={{ products, loading, favouriteItems, addToFavourites }}
+    >
       {children}
     </Context.Provider>
   );
