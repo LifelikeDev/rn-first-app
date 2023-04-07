@@ -21,6 +21,11 @@ const ProductContext = ({ children }) => {
         title: currentProductItem.title,
         reason,
       });
+    } else {
+      favouriteItemsCopy[foundIndex] = {
+        ...favouriteItemsCopy[foundIndex],
+        reason,
+      };
     }
 
     setFavouriteItems(favouriteItemsCopy);

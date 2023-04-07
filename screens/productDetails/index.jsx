@@ -19,12 +19,17 @@ export default function ProductDetails() {
   } = useRoute();
   const navigation = useNavigation();
 
-  const { addToFavourites } = useContext(Context);
+  const { addToFavourites, favouriteItems } = useContext(Context);
 
   const [loading, setLoading] = useState(false);
   const [productDetailsData, setProductDetailsData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [reason, setReason] = useState("");
+
+  const currentProductExistsInFavouriteItems =
+    favouriteItems && favouriteItems.length > 0
+      ? favouriteItems.filter((item) => item.id === productId).length > 0
+      : false;
 
   // handle data fetch
   useEffect(() => {
@@ -53,7 +58,11 @@ export default function ProductDetails() {
           <Button
             onPress={() => setModalVisible(true)}
             color="#282872"
-            title="Add Favourites"
+            title={
+              currentProductExistsInFavouriteItems
+                ? "Update Favourites"
+                : "Add Favourites"
+            }
           />
         );
       },
@@ -101,7 +110,9 @@ export default function ProductDetails() {
                   handleModalVisibility();
                 }}
               >
-                <Text style={styles.textStyle}>Add</Text>
+                <Text style={styles.textStyle}>
+                  {currentProductExistsInFavouriteItems ? "Update" : "Add"}
+                </Text>
               </Pressable>
 
               <Pressable
