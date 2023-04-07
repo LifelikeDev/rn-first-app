@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import FavouriteItem from "../../components/favourite";
 import { Context } from "../../context";
 
 export default function Favourites() {
@@ -15,9 +16,13 @@ export default function Favourites() {
 
   return (
     <View>
-      {favouriteItems.map((item) => (
-        <Text key={item.id}>{item.title}</Text>
-      ))}
+      <FlatList
+        data={favouriteItems}
+        renderItem={({ item }) => (
+          <FavouriteItem title={item.title} reason={item.reason} />
+        )}
+        keyExtractor={(itemData) => itemData.id}
+      />
     </View>
   );
 }
