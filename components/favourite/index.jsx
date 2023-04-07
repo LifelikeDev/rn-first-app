@@ -1,11 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
-export default function FavouriteItem({ title, reason }) {
+export default function FavouriteItem({
+  title,
+  reason,
+  handleRemove,
+  productId,
+}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={[styles.title, styles.reason]}>{reason}</Text>
+      <Pressable onPress={() => handleRemove(productId)}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.title, styles.reason]}>{reason}</Text>
+      </Pressable>
     </View>
   );
 }

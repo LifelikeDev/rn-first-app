@@ -31,6 +31,14 @@ const ProductContext = ({ children }) => {
     setFavouriteItems(favouriteItemsCopy);
   };
 
+  // remove from favourites
+  const handleRemove = (productId) => {
+    let favouriteItemsCopy = [...favouriteItems];
+    const filtered = favouriteItemsCopy.filter((item) => item.id !== productId);
+
+    setFavouriteItems(filtered);
+  };
+
   // api call
   useEffect(() => {
     setLoading(true);
@@ -48,11 +56,15 @@ const ProductContext = ({ children }) => {
     fetchProducts();
   }, []);
 
-  console.log(favouriteItems);
-
   return (
     <Context.Provider
-      value={{ products, loading, favouriteItems, addToFavourites }}
+      value={{
+        products,
+        loading,
+        favouriteItems,
+        addToFavourites,
+        handleRemove,
+      }}
     >
       {children}
     </Context.Provider>

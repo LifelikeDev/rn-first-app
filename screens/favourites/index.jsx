@@ -4,7 +4,7 @@ import FavouriteItem from "../../components/favourite";
 import { Context } from "../../context";
 
 export default function Favourites() {
-  const { favouriteItems } = useContext(Context);
+  const { favouriteItems, handleRemove } = useContext(Context);
 
   if (!favouriteItems.length) {
     return (
@@ -19,7 +19,12 @@ export default function Favourites() {
       <FlatList
         data={favouriteItems}
         renderItem={({ item }) => (
-          <FavouriteItem title={item.title} reason={item.reason} />
+          <FavouriteItem
+            title={item.title}
+            reason={item.reason}
+            productId={item.id}
+            handleRemove={handleRemove}
+          />
         )}
         keyExtractor={(itemData) => itemData.id}
       />

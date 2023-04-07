@@ -50,7 +50,7 @@ export default function ProductDetails() {
     fetchProductDetails();
   }, []);
 
-  // handle adding favourites
+  // handle add favourites button
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => {
